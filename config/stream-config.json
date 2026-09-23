@@ -1,0 +1,83 @@
+{
+  "channel": {
+    "name": "uncompiled.om",
+    "handle": "@uncompiled.om",
+    "tagline": "GAMES // CONVERSATIONS // REACTIONS // UNCUT",
+    "status": "LIVE BROADCAST",
+    "resolution": "1080P60 HDR",
+    "socials": [
+      { "platform": "YOUTUBE", "handle": "youtube.com/@uncompiled.om", "icon": "yt" },
+      { "platform": "X / TWITTER", "handle": "@uncompiled_om", "icon": "x" },
+      { "platform": "DISCORD", "handle": "discord.gg/uncompiled", "icon": "dc" },
+      { "platform": "INSTAGRAM", "handle": "@uncompiled.om", "icon": "ig" }
+    ]
+  },
+  "stream": {
+    "title": "LATE NIGHT TALKS & REACTS // GAMING SESSION",
+    "category": "TALK & GAMING",
+    "tags": ["TALK", "REACT", "GAMING", "CHILL", "NO FILTER"],
+    "goals": {
+      "followerGoal": { "current": 842, "target": 1000, "label": "COMMUNITY GOAL" },
+      "subGoal": { "current": 47, "target": 100, "label": "SUB GOAL" }
+    }
+  },
+  "sponsors": [
+    {
+      "id": "sponsor-1",
+      "brand": "NOTHING",
+      "subtitle": "AUDIO & MOBILE COLLABORATION",
+      "badge": "OFFICIAL AUDIO PARTNER",
+      "headline": "Pure Sound. Transparent Design.",
+      "description": "Experience the ear (2) with high-res audio and next-gen smart ANC.",
+      "code": "UNCOMPILED",
+      "discount": "15% OFF AT CHECKOUT",
+      "url": "nothing.tech/uncompiled",
+      "accentColor": "#ffffff",
+      "logoText": "NOTHING (R)"
+    },
+    {
+      "id": "sponsor-2",
+      "brand": "KEYCHRON",
+      "subtitle": "PREMIUM CUSTOM HARDWARE",
+      "badge": "DESK SETUP SPONSOR",
+      "headline": "Crafted For Ultimate Precision.",
+      "description": "Wireless mechanical keyboards with hot-swappable switches and CNC aluminum body.",
+      "code": "OMSTREAM",
+      "discount": "$20 OFF KEYBOARDS",
+      "url": "keychron.com/uncompiled",
+      "accentColor": "#ff6b4a",
+      "logoText": "KEYCHRON LABS"
+    },
+    {
+      "id": "sponsor-3",
+      "brand": "MOFT",
+      "subtitle": "MOBILE ECOSYSTEM & STANDS",
+      "badge": "LIFESTYLE GEAR",
+      "headline": "Invisible Workstation Anywhere.",
+      "description": "Snap-on magnetic stands, origami laptop desks, and minimalist creator accessories.",
+      "code": "UNCOMPILED10",
+      "discount": "10% OFF SITEWIDE",
+      "url": "moft.us/uncompiled",
+      "accentColor": "#38bdf8",
+      "logoText": "MOFT DESIGN"
+    },
+    {
+      "id": "sponsor-4",
+      "brand": "MODERN CREATIVE",
+      "subtitle": "CURATED APPAREL & ACCESSORIES",
+      "badge": "EXCLUSIVE DROP",
+      "headline": "Heavyweight Garments For Creators.",
+      "description": "Minimalist heavyweight hoodies and studio essentials. Limited batch run.",
+      "code": "UNCOMPILED25",
+      "discount": "FREE WORLDWIDE SHIPPING",
+      "url": "studio.uncompiled.om",
+      "accentColor": "#a78bfa",
+      "logoText": "STUDIO / 01"
+    }
+  ],
+  "timing": {
+    "sponsorRotationSeconds": 240,
+    "sponsorDisplayDurationSeconds": 18,
+    "alertDurationSeconds": 6
+  }
+}

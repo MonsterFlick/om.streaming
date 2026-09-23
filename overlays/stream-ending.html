@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>uncompiled.om // Stream Ending</title>
+  <link rel="stylesheet" href="../assets/css/editorial-design.css">
+  <style>
+    .ending-container {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      background: #090a0f;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 72px 96px;
+      overflow: hidden;
+    }
+
+    .ambient-aurora {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .credits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .outro-title {
+      font-size: 80px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .credits-scroll-box {
+      background: rgba(18, 20, 26, 0.65);
+      border: 1px solid var(--border-hairline);
+      backdrop-filter: var(--glass-blur);
+      border-radius: 28px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: var(--shadow-luxe);
+    }
+
+    .credits-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .credits-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent-amber);
+      text-transform: uppercase;
+    }
+
+    .credits-names {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="ending-container">
+    <div class="ambient-aurora"></div>
+    <div class="studio-grid"></div>
+
+    <!-- Top Header -->
+    <header style="display: flex; justify-content: space-between; align-items: center; z-index: 10;">
+      <div class="brand-channel" style="font-size: 30px;">
+        uncompiled<span class="dot-sep">.</span>om
+      </div>
+      <div class="badge-pill">
+        <span class="dot amber"></span>
+        <span>BROADCAST CONCLUDED // SIGNING OFF</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="credits-grid">
+      <div>
+        <span class="badge-pill" style="margin-bottom: 20px;">
+          <span class="dot live"></span>
+          <span>EPISODE COMPLETED</span>
+        </span>
+        <h1 class="brand-title outro-title">THANKS FOR<br>HANGING OUT.</h1>
+        <p style="font-size: 20px; color: var(--text-secondary); max-width: 540px; line-height: 1.5;">
+          Another incredible session in the books. Join the Discord community to share clips, suggest game titles, and vote on upcoming react topics.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 36px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em;">
+            NEXT LIVE BROADCAST //
+          </div>
+          <div style="font-family: var(--font-display); font-size: 22px; font-weight: 800; color: #ffffff;">
+            FRIDAY • 8:00 PM EST / 5:00 PM PST
+          </div>
+        </div>
+      </div>
+
+      <!-- Credits Wall -->
+      <div class="credits-scroll-box">
+        <div class="credits-section">
+          <div class="credits-label">TOP SUPPORTERS & GIFTERS</div>
+          <div class="credits-names">
+            elena.eth • marcus_v • kyle_tech • cyber_zen • void_walker • astrid_9
+          </div>
+        </div>
+
+        <div class="credits-section" style="border-top: 1px solid var(--border-hairline); padding-top: 16px;">
+          <div class="credits-label">OFFICIAL BRAND PARTNERS</div>
+          <div class="credits-names">
+            Nothing Tech • Keychron • MOFT Design • Studio / 01
+          </div>
+        </div>
+
+        <div class="credits-section" style="border-top: 1px solid var(--border-hairline); padding-top: 16px;">
+          <div class="credits-label">JOIN THE COMMUNITY</div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--accent-amber);">
+            discord.gg/uncompiled • youtube.com/@uncompiled.om
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Footer -->
+    <footer style="z-index: 10; border-top: 1px solid var(--border-hairline); padding-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">
+        COPYRIGHT © UNCOMPILED.OM ALL RIGHTS RESERVED
+      </span>
+      <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);">
+        OFFLINE MODE • SEE YOU NEXT STREAM
+      </span>
+    </footer>
+  </div>
+
+  <script src="../assets/js/channel-bus.js"></script>
+</body>
+</html>

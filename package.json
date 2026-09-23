@@ -1,0 +1,12 @@
+{
+  "name": "uncompiled-om-streaming-suite",
+  "version": "1.0.0",
+  "description": "High-End Editorial Studio OBS Overlay Suite & Automation Hub for uncompiled.om",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["obs", "stream-overlay", "twitch", "youtube-streaming", "automations"],
+  "author": "uncompiled.om",
+  "license": "MIT"
+}

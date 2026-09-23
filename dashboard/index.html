@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>uncompiled.om // Streamer Control Deck</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <header class="dash-header">
+      <div>
+        <div class="dash-brand">uncompiled<span>.</span>om</div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+          MISSION CONTROL DECK • REALTIME OBS EVENT BRIDGE
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <div class="live-indicator">
+          <div class="pulse"></div>
+          <span>BUS CONNECTED</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="dashboard-grid">
+      <!-- 1. Sponsor Management & Broadcast Deck (Takes 6 cols) -->
+      <section class="panel-card" style="grid-column: span 6;">
+        <div class="panel-title">
+          <span>SPONSOR BROADCAST DECK</span>
+          <span class="mono-tag">[ TIMED OR ON-DEMAND ]</span>
+        </div>
+
+        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+          Click any brand below to immediately broadcast its luxury collab card & promo code on screen with audio chime.
+        </p>
+
+        <div class="sponsor-grid" id="sponsor-triggers-container">
+          <!-- Populated by dashboard.js -->
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 8px;">
+          <button class="btn btn-primary" style="flex: 1;" onclick="triggerNextSponsor()">
+            ↻ ROTATE NEXT SPONSOR
+          </button>
+        </div>
+      </section>
+
+      <!-- 2. Alert Simulator (Takes 6 cols) -->
+      <section class="panel-card" style="grid-column: span 6;">
+        <div class="panel-title">
+          <span>INTERACTIVE ALERT SIMULATOR</span>
+          <span class="mono-tag">[ TEST POPUPS ]</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <button class="btn" id="btn-test-follow">
+            ★ TRIGGER NEW FOLLOWER
+          </button>
+          <button class="btn" id="btn-test-raid">
+            ⚡ TRIGGER RAID (420 RAIDERS)
+          </button>
+        </div>
+
+        <!-- Custom Sub Test -->
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr auto; gap: 10px; align-items: end;">
+          <div class="input-group">
+            <label class="input-label">SUBSCRIBER NAME</label>
+            <input class="input-field" id="input-alert-sub-name" value="alex_prime" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">TIER</label>
+            <select class="input-field" id="select-alert-sub-tier">
+              <option value="TIER 1">TIER 1</option>
+              <option value="TIER 2">TIER 2</option>
+              <option value="TIER 3">TIER 3 (VIP)</option>
+              <option value="PRIME">PRIME SUB</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" id="btn-test-sub" style="height: 40px;">
+            TEST SUB
+          </button>
+        </div>
+
+        <!-- Custom Donation Test -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="input-group">
+            <label class="input-label">DONOR NAME</label>
+            <input class="input-field" id="input-donor-name" value="elena.eth" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">AMOUNT</label>
+            <input class="input-field" id="input-donor-amount" value="$50.00" />
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">MESSAGE</label>
+          <input class="input-field" id="input-donor-msg" value="Incredible production quality tonight Om! Keep cooking." />
+        </div>
+        <button class="btn" id="btn-test-donation" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
+          TRIGGER DONATION ALERT ($)
+        </button>
+      </section>
+
+      <!-- 3. Stream Focus / Topic Controller (Takes 6 cols) -->
+      <section class="panel-card" style="grid-column: span 6;">
+        <div class="panel-title">
+          <span>STREAM METRICS & TOPIC FOCUS</span>
+          <span class="mono-tag">[ LIVE SYNCHRONIZER ]</span>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">LIVE STREAM TOPIC / FOCUS</label>
+          <div style="display: flex; gap: 10px;">
+            <input class="input-field" style="flex: 1;" id="input-topic" value="TALK, TECH & UNCUT REACTIONS // LATE NIGHT SESSION" />
+            <button class="btn btn-primary" id="btn-update-topic">PUSH TOPIC</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end;">
+          <div class="input-group">
+            <label class="input-label">COMMUNITY GOAL CURRENT</label>
+            <input class="input-field" id="input-goal-cur" type="number" value="842" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">TARGET</label>
+            <input class="input-field" id="input-goal-tar" type="number" value="1000" />
+          </div>
+          <button class="btn" id="btn-update-goal" style="height: 40px;">UPDATE GOAL</button>
+        </div>
+
+        <!-- Starting Soon Timer Adjuster -->
+        <div class="input-group" style="border-top: 1px solid var(--border-hairline); padding-top: 16px;">
+          <label class="input-label">STARTING SOON COUNTDOWN (SECONDS)</label>
+          <div style="display: flex; gap: 10px;">
+            <input class="input-field" style="width: 140px;" id="input-timer-seconds" type="number" value="300" />
+            <button class="btn" id="btn-set-timer">SET TIMER</button>
+            <button class="btn" onclick="document.getElementById('input-timer-seconds').value='180'; document.getElementById('btn-set-timer').click();">3 MINS</button>
+            <button class="btn" onclick="document.getElementById('input-timer-seconds').value='300'; document.getElementById('btn-set-timer').click();">5 MINS</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Live Chat Connector & Announcement Injector (Takes 6 cols) -->
+      <section class="panel-card" style="grid-column: span 6;">
+        <div class="panel-title">
+          <span>LIVE CHAT CONNECT & API</span>
+          <span class="mono-tag">[ TWITCH / YOUTUBE / API ]</span>
+        </div>
+
+        <!-- Direct Twitch Connect -->
+        <div class="input-group">
+          <label class="input-label">NATIVE TWITCH CHAT CONNECTOR (ZERO TOKENS NEEDED)</label>
+          <div style="display: flex; gap: 10px;">
+            <input class="input-field" style="flex: 1;" id="input-twitch-channel" placeholder="e.g. uncompiled_om" />
+            <button class="btn btn-primary" id="btn-connect-twitch">CONNECT TWITCH</button>
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted);">
+            Direct anonymous IRC connection. Reads chat, VIPs, mods, and subscriber badges live.
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-hairline); padding-top: 12px;"></div>
+
+        <!-- Chat Injector -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="input-group">
+            <label class="input-label">AUTHOR NAME</label>
+            <input class="input-field" id="input-chat-author" value="uncompiled.om" />
+          </div>
+          <div class="input-group">
+            <label class="input-label">BADGE ROLE</label>
+            <select class="input-field" id="select-chat-role">
+              <option value="MOD">MOD (STREAMER)</option>
+              <option value="VIP">VIP</option>
+              <option value="SUB">SUBSCRIBER</option>
+              <option value="VIEWER">VIEWER</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">MESSAGE OR ANNOUNCEMENT</label>
+          <input class="input-field" id="input-chat-text" placeholder="Type a message or announcement..." />
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-primary" style="flex: 1;" id="btn-send-chat">
+            SEND TO ON-SCREEN CHAT
+          </button>
+          <button class="btn btn-danger" onclick="window.streamBus.emit('CLEAR_CHAT'); showToast('Chat Cleared');">
+            CLEAR CHAT
+          </button>
+        </div>
+
+        <!-- External Webhook URL Info -->
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-hairline); border-radius: 10px; padding: 10px 14px; font-size: 11px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-family: var(--font-mono); color: var(--text-secondary);">POST Webhook: http://localhost:3000/api/chat</span>
+          <button class="btn" style="padding: 4px 10px; font-size: 10px;" onclick="navigator.clipboard.writeText('http://localhost:3000/api/chat'); showToast('Copied Webhook URL!');">COPY</button>
+        </div>
+      </section>
+
+      <!-- 5. Scene Quick Launchers & OBS Links (Takes 12 cols) -->
+      <section class="panel-card" style="grid-column: span 12;">
+        <div class="panel-title">
+          <span>OBS SCENE OVERLAYS // DIRECT LAUNCHERS</span>
+          <span class="mono-tag">[ 1920 X 1080 CANVAS ]</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;">
+          <div class="panel-card" style="padding: 16px; background: var(--bg-surface-elevated);">
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px;">1. GAME OVERLAY</div>
+            <p style="font-size: 11px; color: var(--text-muted);">Cam frame, dynamic sponsor lower-third, event ticker.</p>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              <a href="../overlays/game-overlay.html" target="_blank" class="btn" style="flex: 1; padding: 6px; font-size: 11px;">PREVIEW</a>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding: 16px; background: var(--bg-surface-elevated);">
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px;">2. CHATTING & REACT</div>
+            <p style="font-size: 11px; color: var(--text-muted);">Big screen viewport, cam box, chat, collab card.</p>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              <a href="../overlays/chatting-react.html" target="_blank" class="btn" style="flex: 1; padding: 6px; font-size: 11px;">PREVIEW</a>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding: 16px; background: var(--bg-surface-elevated);">
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px;">3. STARTING SOON</div>
+            <p style="font-size: 11px; color: var(--text-muted);">Animated fluid mesh, countdown, episode rundown.</p>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              <a href="../overlays/starting-soon.html" target="_blank" class="btn" style="flex: 1; padding: 6px; font-size: 11px;">PREVIEW</a>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding: 16px; background: var(--bg-surface-elevated);">
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px;">4. BE RIGHT BACK</div>
+            <p style="font-size: 11px; color: var(--text-muted);">Intermission screen, sponsor spotlight loop.</p>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              <a href="../overlays/brb.html" target="_blank" class="btn" style="flex: 1; padding: 6px; font-size: 11px;">PREVIEW</a>
+            </div>
+          </div>
+
+          <div class="panel-card" style="padding: 16px; background: var(--bg-surface-elevated);">
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: 14px;">5. STREAM ENDING</div>
+            <p style="font-size: 11px; color: var(--text-muted);">Outro credits, top supporters, next stream schedule.</p>
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              <a href="../overlays/stream-ending.html" target="_blank" class="btn" style="flex: 1; padding: 6px; font-size: 11px;">PREVIEW</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="dash-toast" class="dash-toast"></div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/channel-bus.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

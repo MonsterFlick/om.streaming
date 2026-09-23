@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>uncompiled.om // Game Overlay</title>
+  <link rel="stylesheet" href="../assets/css/editorial-design.css">
+  <style>
+    /* Specific Positioning for In-Game Layout */
+    .game-hud-container {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      pointer-events: none;
+    }
+
+    /* Top Status & Event Ticker */
+    .top-event-bar {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .event-stat-chip {
+      background: rgba(14, 16, 22, 0.78);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-hairline);
+      border-radius: 999px;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .event-stat-chip .chip-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .event-stat-chip .chip-val {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Bottom-Right Webcam Frame (16:9) */
+    .webcam-anchor {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      width: 380px;
+      height: 214px;
+      border-radius: 20px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+      overflow: hidden;
+    }
+
+    .webcam-anchor::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    }
+
+    .webcam-tag-top {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 5;
+    }
+
+    .webcam-tag-bottom {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      z-index: 5;
+    }
+
+    /* Left Floating In-Game Chat */
+    .game-chat-dock {
+      position: absolute;
+      bottom: 140px;
+      left: 32px;
+      width: 340px;
+      height: 380px;
+    }
+
+    /* Bottom-Left Sponsor Mount */
+    .sponsor-lower-third-dock {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      width: 620px;
+      min-height: 80px;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-hud-container">
+    <!-- Top Alert Notification Mount -->
+    <div id="alert-mount"></div>
+
+    <!-- Top Event Ticker -->
+    <header class="top-event-bar">
+      <div class="badge-pill">
+        <span class="dot live"></span>
+        <span>REC // LIVE 60FPS</span>
+      </div>
+
+      <div class="event-stat-chip">
+        <span class="chip-label">LATEST SUB</span>
+        <span class="chip-val" id="hud-latest-sub">alex_prime</span>
+      </div>
+
+      <div class="event-stat-chip">
+        <span class="chip-label">TOP DONATION</span>
+        <span class="chip-val" id="hud-top-donation">elena.eth ($50.00)</span>
+      </div>
+
+      <div class="event-stat-chip">
+        <span class="chip-label">COMMUNITY</span>
+        <span class="chip-val" id="hud-goal-val">842 / 1000</span>
+      </div>
+    </header>
+
+    <!-- In-Game Chat Box (Auto-Fading for zero clutter) -->
+    <div class="game-chat-dock">
+      <div id="chat-mount"></div>
+    </div>
+
+    <!-- Dynamic Timed Sponsor Lower Third -->
+    <div class="sponsor-lower-third-dock" id="sponsor-mount"></div>
+
+    <!-- Webcam Frame Dock (Place your OBS Video Capture Device directly underneath or within this boundary) -->
+    <div class="webcam-anchor">
+      <div class="webcam-tag-top">
+        <div class="badge-pill" style="padding: 4px 10px; font-size: 10px;">
+          <span class="dot amber"></span>
+          <span>OM.CAM</span>
+        </div>
+      </div>
+      <div class="webcam-tag-bottom">
+        <span style="font-family: var(--font-display); font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.7); letter-spacing: 0.05em;">uncompiled.om</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/channel-bus.js"></script>
+  <script src="../assets/js/alert-engine.js"></script>
+  <script src="../assets/js/sponsor-engine.js"></script>
+  <script src="../assets/js/chat-widget.js"></script>
+  <script>
+    // Initialize components
+    const alerts = new AlertEngine();
+    const sponsors = new SponsorEngine({
+      container: document.getElementById('sponsor-mount'),
+      rotationSeconds: 200,
+      displayDurationSeconds: 16
+    });
+    const chat = new ChatWidget({
+      container: document.getElementById('chat-mount'),
+      autoFade: true,
+      fadeDelay: 10000
+    });
+
+    // Listen for config or stat updates
+    window.streamBus.on('UPDATE_METRICS', (data) => {
+      if (data.latestSub) document.getElementById('hud-latest-sub').textContent = data.latestSub;
+      if (data.topDonation) document.getElementById('hud-top-donation').textContent = data.topDonation;
+      if (data.goalVal) document.getElementById('hud-goal-val').textContent = data.goalVal;
+    });
+  </script>
+</body>
+</html>

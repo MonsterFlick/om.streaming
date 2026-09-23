@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>uncompiled.om // Starting Soon</title>
+  <link rel="stylesheet" href="../assets/css/editorial-design.css">
+  <style>
+    .screen-container {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      background: #08090d;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 72px 96px;
+    }
+
+    /* Ambient dynamic gradient flow */
+    .fluid-mesh {
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 140%;
+      height: 160%;
+      background: 
+        radial-gradient(circle at 30% 40%, rgba(245, 158, 11, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 75% 60%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+      filter: blur(80px);
+      animation: float-mesh 18s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes float-mesh {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.15) rotate(12deg); }
+    }
+
+    .top-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    /* Central Editorial Block */
+    .center-content-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: center;
+      z-index: 10;
+      margin-top: -20px;
+    }
+
+    .title-block h1 {
+      font-size: 88px;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      font-weight: 800;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .title-block .subtitle-tag {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    /* Timer & Agenda Card */
+    .agenda-card {
+      background: rgba(18, 20, 26, 0.65);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-hairline);
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: var(--shadow-luxe);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .timer-display-box {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      padding-bottom: 24px;
+    }
+
+    .timer-digits {
+      font-family: var(--font-display);
+      font-size: 76px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .timer-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-amber);
+      letter-spacing: 0.15em;
+    }
+
+    /* Agenda List */
+    .agenda-item {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+    }
+
+    .agenda-num {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-amber);
+    }
+
+    .agenda-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Bottom Sponsor Showcase Marquee */
+    .bottom-sponsor-row {
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-hairline);
+      padding-top: 24px;
+    }
+
+    .sponsor-chips-group {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .sponsor-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-hairline);
+      border-radius: 12px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sponsor-chip .b-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    .sponsor-chip .b-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-amber);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <div class="screen-container">
+    <div class="fluid-mesh"></div>
+    <div class="studio-grid"></div>
+
+    <!-- Top Meta Row -->
+    <header class="top-meta-row">
+      <div class="brand-channel" style="font-size: 32px;">
+        uncompiled<span class="dot-sep">.</span>om
+      </div>
+
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <div class="badge-pill">
+          <span class="dot amber"></span>
+          <span>INITIALIZING BROADCAST</span>
+        </div>
+        <div class="badge-pill">
+          <span>1080P60 // HDR</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Center Content -->
+    <main class="center-content-grid">
+      <div class="title-block">
+        <span class="badge-pill" style="margin-bottom: 20px;">
+          <span class="dot live"></span>
+          <span>SEASON 01 // LIVE SESSION</span>
+        </span>
+        <h1 class="brand-title">STARTING<br>VERY SOON.</h1>
+        <p class="subtitle-tag">
+          Grab your headphones and tune in. Late night discussions, unfiltered reactions, and gaming session.
+        </p>
+      </div>
+
+      <!-- Agenda & Timer Card -->
+      <div class="agenda-card">
+        <div class="timer-display-box">
+          <div class="timer-digits" id="countdown-timer">04:45</div>
+          <div class="timer-label">STREAM GOES LIVE</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.12em;">
+            TODAY'S RUNDOWN //
+          </div>
+
+          <div class="agenda-item">
+            <span class="agenda-num">01</span>
+            <span class="agenda-text">Warmup, Coffee & Community Catch-Up</span>
+          </div>
+          <div class="agenda-item">
+            <span class="agenda-num">02</span>
+            <span class="agenda-text">Weekly Tech Drops & Reddit Video Reactions</span>
+          </div>
+          <div class="agenda-item">
+            <span class="agenda-num">03</span>
+            <span class="agenda-text">Main Gaming Segment // Live Gameplay</span>
+          </div>
+          <div class="agenda-item">
+            <span class="agenda-num">04</span>
+            <span class="agenda-text">Unfiltered Q&A & Discord Voice Party</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Row: Official Brand Partners -->
+    <footer class="bottom-sponsor-row">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.12em;">
+          OFFICIAL PARTNERS //
+        </span>
+        <div class="sponsor-chips-group">
+          <div class="sponsor-chip">
+            <span class="b-name">NOTHING</span>
+            <span class="b-code">CODE: UNCOMPILED (15% OFF)</span>
+          </div>
+          <div class="sponsor-chip">
+            <span class="b-name">KEYCHRON</span>
+            <span class="b-code">CODE: OMSTREAM ($20 OFF)</span>
+          </div>
+          <div class="sponsor-chip">
+            <span class="b-name">MOFT</span>
+            <span class="b-code">CODE: UNCOMPILED10</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);">
+        DISCORD.GG/UNCOMPILED • @UNCOMPILED_OM
+      </div>
+    </footer>
+  </div>
+
+  <script src="../assets/js/channel-bus.js"></script>
+  <script>
+    // Smooth Countdown Timer Logic
+    let totalSeconds = 285; // 4m 45s
+    const timerEl = document.getElementById('countdown-timer');
+
+    function updateTimer() {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      timerEl.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      if (totalSeconds > 0) {
+        totalSeconds--;
+      } else {
+        timerEl.textContent = "00:00";
+      }
+    }
+
+    setInterval(updateTimer, 1000);
+
+    // Allow dashboard to set custom timer duration
+    window.streamBus.on('SET_TIMER', (payload) => {
+      if (payload && payload.seconds) {
+        totalSeconds = parseInt(payload.seconds, 10);
+        updateTimer();
+      }
+    });
+  </script>
+</body>
+</html>
