@@ -1,5 +1,6 @@
 import { INITIAL_STREAM_STATE } from "@/config/stream-config";
 import { StreamState } from "./types";
+export { INITIAL_STREAM_STATE };
 
 type EventHandler<T = unknown> = (payload: T, timestamp: number) => void;
 

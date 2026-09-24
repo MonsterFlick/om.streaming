@@ -2,16 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { Coffee, Radio, Sparkles } from "lucide-react";
-import { streamBus } from "@/lib/stream-bus";
+import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { StreamState } from "@/lib/types";
 import { AnimatedText } from "@/components/overlays/AnimatedText";
 import { SponsorCard } from "@/components/overlays/SponsorCard";
 import { ChatWidget } from "@/components/overlays/ChatWidget";
 
 export default function BRBOverlayPage() {
-  const [state, setState] = useState<StreamState>(streamBus.getState());
+  const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
 
   useEffect(() => {
+    setState(streamBus.getState());
     return streamBus.on("STATE_UPDATED", (newState) => {
       setState(newState as StreamState);
     });

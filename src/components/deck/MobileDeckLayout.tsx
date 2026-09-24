@@ -18,15 +18,16 @@ import {
   Music,
   Zap,
 } from "lucide-react";
-import { streamBus } from "@/lib/stream-bus";
+import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { soundEffects } from "@/lib/sound-effects";
 import { StreamScene, StreamState } from "@/lib/types";
 
 export function MobileDeckLayout() {
-  const [state, setState] = useState<StreamState>(streamBus.getState());
+  const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
   const [uptimeSeconds, setUptimeSeconds] = useState(0);
 
   useEffect(() => {
+    setState(streamBus.getState());
     const unsub = streamBus.on("STATE_UPDATED", (newState) => {
       setState(newState as StreamState);
     });

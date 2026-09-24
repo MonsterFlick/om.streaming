@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Tv, Smartphone, Layers, Radio, Sparkles, ExternalLink } from "lucide-react";
-import { streamBus } from "@/lib/stream-bus";
+import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { StreamState } from "@/lib/types";
 
 export default function StudioLandingPage() {
-  const [state, setState] = useState<StreamState>(streamBus.getState());
+  const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
 
   useEffect(() => {
+    setState(streamBus.getState());
     return streamBus.on("STATE_UPDATED", (newState) => {
       setState(newState as StreamState);
     });

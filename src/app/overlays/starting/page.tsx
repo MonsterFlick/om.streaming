@@ -2,15 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { Clock, Radio, Sparkles } from "lucide-react";
-import { streamBus } from "@/lib/stream-bus";
+import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { StreamState } from "@/lib/types";
 import { AnimatedText } from "@/components/overlays/AnimatedText";
 
 export default function StartingSoonOverlayPage() {
-  const [state, setState] = useState<StreamState>(streamBus.getState());
-  const [secondsLeft, setSecondsLeft] = useState(state.timerSeconds || 300);
+  const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
+  const [secondsLeft, setSecondsLeft] = useState(300);
 
   useEffect(() => {
+    const s = streamBus.getState();
+    setState(s);
+    if (s.timerSeconds) setSecondsLeft(s.timerSeconds);
+
     const unsub = streamBus.on("STATE_UPDATED", (newState) => {
       const s = newState as StreamState;
       setState(s);

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, MicOff, ShieldAlert, Video } from "lucide-react";
-import { streamBus } from "@/lib/stream-bus";
+import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { StreamState, WebcamConfig } from "@/lib/types";
 
 interface WebcamFrameProps {
@@ -17,10 +17,11 @@ export function WebcamFrame({
   className = "",
   customConfig,
 }: WebcamFrameProps) {
-  const [state, setState] = useState<StreamState>(streamBus.getState());
+  const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
   const [hasAlertGlow, setHasAlertGlow] = useState(false);
 
   useEffect(() => {
+    setState(streamBus.getState());
     const unsubState = streamBus.on("STATE_UPDATED", (newState) => {
       setState(newState as StreamState);
     });

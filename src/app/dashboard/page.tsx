@@ -15,7 +15,7 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
-import { streamBus } from "@/lib/stream-bus";
+import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { soundEffects } from "@/lib/sound-effects";
 import { setupStreamHotkeys } from "@/lib/hotkeys";
 import { StreamScene, StreamState, WebcamConfig, TextAnimationPreset } from "@/lib/types";
@@ -32,10 +32,11 @@ import { SoundboardDock } from "@/components/dashboard/SoundboardDock";
 import { RunOfShowNotes } from "@/components/dashboard/RunOfShowNotes";
 
 export default function DashboardPage() {
-  const [state, setState] = useState<StreamState>(streamBus.getState());
+  const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
   const [activeTab, setActiveTab] = useState<"all" | "previews" | "webcam" | "text" | "alerts" | "sponsors">("all");
 
   useEffect(() => {
+    setState(streamBus.getState());
     // 1. Subscribe to universal state updates
     const unsubBus = streamBus.on("STATE_UPDATED", (newState) => {
       setState(newState as StreamState);
