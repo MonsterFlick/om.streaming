@@ -69,12 +69,19 @@ export function AlertBox() {
 
   const getAlertIcon = (type: string) => {
     switch (type) {
+      case "KICK_SUB":
       case "SUB":
         return <Star size={20} className="text-amber-400" />;
+      case "KICK_TIP":
+      case "YT_SUPERCHAT":
       case "DONATION":
         return <DollarSign size={20} className="text-emerald-400" />;
+      case "KICK_RAID":
       case "RAID":
         return <Zap size={20} className="text-blue-400" />;
+      case "YT_MEMBER":
+      case "YT_SUB":
+        return <Sparkles size={20} className="text-rose-400" />;
       default:
         return <Heart size={20} className="text-rose-400" />;
     }
@@ -82,6 +89,18 @@ export function AlertBox() {
 
   const getAlertTitle = (type: string, tier?: string) => {
     switch (type) {
+      case "KICK_SUB":
+        return `KICK SUBSCRIBER // ${tier || "TIER 1"}`;
+      case "KICK_TIP":
+        return "KICK TIP // SUPPORT ACTIVE";
+      case "KICK_RAID":
+        return "KICK RAID // HOST INCOMING";
+      case "YT_SUPERCHAT":
+        return "YOUTUBE SUPER CHAT // APPRECIATED";
+      case "YT_MEMBER":
+        return `YOUTUBE MEMBER // ${tier || "WELCOME"}`;
+      case "YT_SUB":
+        return "YOUTUBE SUBSCRIBER // WELCOME";
       case "SUB":
         return `NEW SUBSCRIBER // ${tier || "TIER 1"}`;
       case "DONATION":

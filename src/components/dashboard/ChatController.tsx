@@ -33,6 +33,8 @@ export function ChatController() {
     setIsConnected(true);
   };
 
+  const [authorPlatform, setAuthorPlatform] = useState<"kick" | "youtube" | "twitch" | "system">("kick");
+
   const handleSendAnnouncement = (e: React.FormEvent) => {
     e.preventDefault();
     if (!chatText.trim()) return;
@@ -44,7 +46,7 @@ export function ChatController() {
       role: authorRole,
       text: chatText,
       timestamp: Date.now(),
-      platform: "system",
+      platform: authorPlatform,
     });
 
     setChatText("");
@@ -61,7 +63,7 @@ export function ChatController() {
         <div className="flex items-center gap-2">
           <MessageSquare size={16} className="text-amber-400" />
           <span className="font-display font-bold text-sm tracking-wider text-white">
-            LIVE CHAT CONNECT & BROADCASTER
+            LIVE CHAT CONNECT & MULTI-PLATFORM BROADCASTER
           </span>
         </div>
 
@@ -78,7 +80,7 @@ export function ChatController() {
       <div className="p-3.5 rounded-2xl bg-black/40 border border-white/5 flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <label className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
-            NATIVE TWITCH IRC FEED (ZERO TOKENS NEEDED)
+            NATIVE TWITCH / MULTI-STREAM IRC FEED
           </label>
           {isConnected && (
             <span className="flex items-center gap-1 font-mono text-[10px] text-emerald-400 font-bold">
@@ -106,10 +108,10 @@ export function ChatController() {
       {/* Manual Message Injector */}
       <form onSubmit={handleSendAnnouncement} className="flex flex-col gap-2">
         <label className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
-          BROADCAST PINNED ANNOUNCEMENT
+          BROADCAST CHAT MESSAGE / ANNOUNCEMENT
         </label>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <input
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
@@ -118,11 +120,22 @@ export function ChatController() {
           />
 
           <select
+            value={authorPlatform}
+            onChange={(e) => setAuthorPlatform(e.target.value as any)}
+            className="px-2 py-2 rounded-xl bg-zinc-900 border border-white/10 font-mono text-xs text-amber-300 focus:outline-none"
+          >
+            <option value="kick">KICK 🟢</option>
+            <option value="youtube">YOUTUBE 🔴</option>
+            <option value="twitch">TWITCH 🟣</option>
+            <option value="system">SYSTEM ⚙️</option>
+          </select>
+
+          <select
             value={authorRole}
             onChange={(e) => setAuthorRole(e.target.value as ChatRole)}
-            className="px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 font-mono text-xs text-white focus:outline-none"
+            className="px-2 py-2 rounded-xl bg-zinc-900 border border-white/10 font-mono text-xs text-white focus:outline-none"
           >
-            <option value="STREAMER">STREAMER / HOST</option>
+            <option value="STREAMER">STREAMER</option>
             <option value="MOD">MODERATOR</option>
             <option value="VIP">VIP</option>
             <option value="SUB">SUBSCRIBER</option>

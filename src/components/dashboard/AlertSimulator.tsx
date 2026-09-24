@@ -57,27 +57,49 @@ export function AlertSimulator() {
       </div>
 
       {/* Quick Triggers */}
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         <button
           onClick={() => fireAlert("FOLLOWER", "marcus_dev")}
-          className="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-left flex items-center justify-between group transition-all"
+          className="p-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-left flex flex-col justify-between group transition-all"
         >
-          <div className="flex items-center gap-2.5">
-            <Heart size={16} className="text-rose-400 group-hover:scale-110 transition-transform" />
-            <span className="font-display font-bold text-xs text-white">TEST FOLLOWER</span>
+          <div className="flex items-center gap-1.5 mb-1">
+            <Heart size={14} className="text-rose-400 group-hover:scale-110 transition-transform" />
+            <span className="font-display font-bold text-[11px] text-white">FOLLOWER</span>
           </div>
-          <span className="font-mono text-[10px] text-zinc-400">marcus_dev</span>
+          <span className="font-mono text-[9px] text-zinc-400">marcus_dev</span>
+        </button>
+
+        <button
+          onClick={() => fireAlert("KICK_SUB", "kick_legend", undefined, "Hyped for the stream!", "TIER 1")}
+          className="p-2.5 rounded-2xl bg-[#53FC18]/10 hover:bg-[#53FC18]/20 border border-[#53FC18]/30 text-left flex flex-col justify-between group transition-all"
+        >
+          <div className="flex items-center gap-1.5 mb-1">
+            <Star size={14} className="text-[#53FC18] group-hover:scale-110 transition-transform" />
+            <span className="font-display font-bold text-[11px] text-white">KICK SUB</span>
+          </div>
+          <span className="font-mono text-[9px] text-[#53FC18]">kick_legend</span>
+        </button>
+
+        <button
+          onClick={() => fireAlert("YT_SUPERCHAT", "youtube_creator", "$25.00", "Keep cooking Om! YouTube chat loves this!")}
+          className="p-2.5 rounded-2xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-left flex flex-col justify-between group transition-all"
+        >
+          <div className="flex items-center gap-1.5 mb-1">
+            <DollarSign size={14} className="text-red-400 group-hover:scale-110 transition-transform" />
+            <span className="font-display font-bold text-[11px] text-white">YT SUPER CHAT</span>
+          </div>
+          <span className="font-mono text-[9px] text-red-300">$25.00</span>
         </button>
 
         <button
           onClick={() => fireAlert("RAID", "neon_valkyrie", "420 RAIDERS")}
-          className="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-left flex items-center justify-between group transition-all"
+          className="p-2.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-left flex flex-col justify-between group transition-all"
         >
-          <div className="flex items-center gap-2.5">
-            <Zap size={16} className="text-blue-400 group-hover:scale-110 transition-transform" />
-            <span className="font-display font-bold text-xs text-white">TEST RAID</span>
+          <div className="flex items-center gap-1.5 mb-1">
+            <Zap size={14} className="text-blue-400 group-hover:scale-110 transition-transform" />
+            <span className="font-display font-bold text-[11px] text-white">RAID</span>
           </div>
-          <span className="font-mono text-[10px] text-zinc-400">420 RAIDERS</span>
+          <span className="font-mono text-[9px] text-zinc-400">420 RAIDERS</span>
         </button>
       </div>
 

@@ -1,6 +1,18 @@
 export type StreamScene = "starting" | "chatting" | "game" | "brb" | "ending";
 
-export type AlertType = "FOLLOWER" | "SUB" | "DONATION" | "RAID" | "BITS" | "SPONSOR";
+export type AlertType =
+  | "FOLLOWER"
+  | "SUB"
+  | "DONATION"
+  | "RAID"
+  | "BITS"
+  | "SPONSOR"
+  | "KICK_SUB"
+  | "KICK_TIP"
+  | "KICK_RAID"
+  | "YT_SUPERCHAT"
+  | "YT_MEMBER"
+  | "YT_SUB";
 
 export interface AlertEvent {
   id: string;
@@ -10,6 +22,7 @@ export interface AlertEvent {
   message?: string;
   tier?: string;
   timestamp: number;
+  platform?: "twitch" | "kick" | "youtube" | "system";
 }
 
 export interface SponsorItem {
@@ -34,7 +47,7 @@ export interface ChatMessage {
   role: ChatRole;
   text: string;
   timestamp: number;
-  platform?: "twitch" | "youtube" | "system";
+  platform?: "twitch" | "kick" | "youtube" | "system";
 }
 
 export type WebcamAspectRatio = "16:9" | "4:3" | "1:1" | "9:16";
@@ -78,6 +91,8 @@ export interface StreamState {
   latestSub: string;
   topDonation: string;
   latestFollower: string;
+  kickChannel?: string;
+  youtubeChannel?: string;
 }
 
 export type SoundEffectType =

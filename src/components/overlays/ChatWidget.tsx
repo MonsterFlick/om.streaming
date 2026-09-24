@@ -79,6 +79,31 @@ export function ChatWidget({
     }
   }, [messages]);
 
+  const getPlatformBadge = (platform?: string) => {
+    switch (platform) {
+      case "kick":
+        return (
+          <span className="px-1.5 py-0.5 rounded bg-[#53FC18]/20 text-[#53FC18] border border-[#53FC18]/40 font-mono text-[8px] font-extrabold uppercase tracking-wider">
+            KICK
+          </span>
+        );
+      case "youtube":
+        return (
+          <span className="px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/40 font-mono text-[8px] font-extrabold uppercase tracking-wider">
+            YT
+          </span>
+        );
+      case "twitch":
+        return (
+          <span className="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/40 font-mono text-[8px] font-extrabold uppercase tracking-wider">
+            TWITCH
+          </span>
+        );
+      default:
+        return null;
+    }
+  };
+
   const getRoleBadge = (role: ChatRole) => {
     switch (role) {
       case "STREAMER":
@@ -133,6 +158,7 @@ export function ChatWidget({
             }`}
           >
             <div className="flex items-center gap-2 mb-1">
+              {getPlatformBadge(msg.platform)}
               {getRoleBadge(msg.role)}
               <span
                 className={`font-display font-bold text-xs truncate ${

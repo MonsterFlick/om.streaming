@@ -101,6 +101,14 @@ class StreamEventBus {
       try {
         localStorage.setItem(`bus_${this.channelName}`, JSON.stringify(message));
       } catch (e) {}
+
+      if (window.location.protocol.startsWith("http")) {
+        fetch("/api/events", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(message),
+        }).catch(() => {});
+      }
     }
 
     // Process locally in current tab
