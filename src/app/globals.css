@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Syne:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-dark: #08090d;
+  --bg-card: rgba(14, 16, 23, 0.78);
+  --bg-card-hover: rgba(22, 25, 36, 0.90);
+  --border-hairline: rgba(255, 255, 255, 0.12);
+  --border-active: rgba(245, 158, 11, 0.6);
+  --text-primary: #fcfcfd;
+  --text-secondary: #9aa0ad;
+  --text-muted: #5e6472;
+  --accent-amber: #f59e0b;
+  --accent-cobalt: #3b82f6;
+  --accent-coral: #ff5252;
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Studio ambient backgrounds */
+.studio-canvas-bg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
+  z-index: 0;
+}
+
+.studio-grid {
+  position: absolute;
+  inset: 0;
+  background-size: 64px 64px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Tactile hardware buttons (Teenage Engineering / Industrial style) */
+.deck-btn {
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(28, 32, 45, 0.9) 0%, rgba(16, 18, 26, 0.95) 100%);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.6), 0 12px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transition: all 0.08s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.deck-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.7), 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.deck-btn.active {
+  border-color: rgba(245, 158, 11, 0.8);
+  background: linear-gradient(180deg, rgba(42, 36, 24, 0.95) 0%, rgba(26, 21, 14, 0.95) 100%);
+  box-shadow: 0 6px 0 rgba(146, 64, 14, 0.6), 0 0 24px rgba(245, 158, 11, 0.3), inset 0 1px 2px rgba(245, 158, 11, 0.4);
+}
+
+.deck-btn.active:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(146, 64, 14, 0.7), 0 0 16px rgba(245, 158, 11, 0.25);
+}
+
+/* Glassmorphism panel */
+.glass-panel {
+  background: rgba(14, 16, 24, 0.72);
+  backdrop-filter: blur(28px);
+  border: 1px solid var(--border-hairline);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.65), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Industrial micro badge */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-hairline);
+  border-radius: 999px;
+  backdrop-filter: blur(20px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.status-dot.live {
+  background: #ff4757;
+  box-shadow: 0 0 10px #ff4757;
+}
+
+.status-dot.amber {
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+}
+
+.status-dot.cobalt {
+  background: #3b82f6;
+  box-shadow: 0 0 10px #3b82f6;
+}
+
+.status-dot.emerald {
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+/* Hide scrollbar on overlays and crisp broadcast rendering */
+.overlay-viewport {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+iframe, img, svg {
+  image-rendering: -webkit-optimize-contrast;
+}

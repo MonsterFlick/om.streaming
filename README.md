@@ -1,126 +1,82 @@
-# `uncompiled.om` — Live Streaming Production Suite & Automations
+# `uncompiled.om` — Next.js 15 Streaming Production Suite & Virtual Stream Deck
 
 Welcome to the official streaming and broadcast production setup for **`uncompiled.om`**. 
-This suite moves away from dated gamer/hacker tropes and gives you an **Editorial Broadcast & Studio Design** aesthetic (inspired by high-end design houses, A24, and Boiler Room) with kinetic typography, smoked acrylic glassmorphism, responsive spring animations, automated sponsor showcases, and a real-time Streamer Control Deck.
+This suite moves away from dated gamer/hacker tropes and gives you an **Editorial Studio Design** aesthetic (inspired by high-end design houses, Nothing Tech, and Teenage Engineering) with kinetic typography, smoked acrylic glassmorphism, responsive spring animations, automated sponsor showcases, an **Executive Control Deck** with live 16:9 screen previews, and a **Wireless Virtual Stream Deck** for mobile devices.
 
 ---
 
-## 1. Curated Tools & Plugins Matrix
+## 1. Core Architecture & Feature Matrix
 
-### Primary Streaming Software & Plugins
-| Software / Plugin | Download & Setup | Why It's Essential For Your Stream |
+| Feature | Description | Access URL |
 | :--- | :--- | :--- |
-| **OBS Studio (v30+)** | [obsproject.com](https://obsproject.com/) | Industry-standard open-source broadcaster. Stable 60fps NVENC encoder. |
-| **OBS-WebSocket** | Built-in (OBS 28+) | Allows local automations, Streamer.bot, and hotkey controllers to switch scenes and mute mics automatically. |
-| **Aitum Vertical** | [aitum.tv/vertical](https://aitum.tv/vertical) | Simultaneously stream to YouTube/Twitch (16:9) and TikTok/Shorts (9:16) with zero duplicate effort. |
-| **Source Record** | OBS Forums Plugin | Records clean gameplay & webcam VODs without overlays for high-res YouTube video editing. |
-| **Advanced Scene Switcher**| OBS Forums Plugin | Automates scene changes: auto-switches to "In-Game" when your game launches, and "Talk/Chatting" when on desktop. |
-| **Streamer.bot** | [streamer.bot](https://streamer.bot/) | Powerful, lightweight event-driven automation for Twitch/YouTube channel points, soundboard, and hotkey macros. |
-
-### Professional Audio Separation & Enhancement
-| Tool | What It Does |
-| :--- | :--- |
-| **SteelSeries Sonar** *(or Elgato Wave Link)* | Free virtual mixer. Splits audio into **Game**, **Chat (Discord)**, **Media (Spotify/YouTube)**, and **Mic**. This ensures Spotify music never gets DMCA striked on VODs. |
-| **Reaper ReaPlugs VST (ReaFIR & ReaComp)** | Broadcast-grade microphone EQ and compression for radio-quality voice. |
-| **NVIDIA Broadcast / RNNoise** | AI noise suppression that removes keyboard clicks and fan hum without muddying your voice. |
+| **Executive Dashboard** | Master mission control with live multi-screen iframe previews, text animation studio, alert simulator, sponsor broadcaster, and goal trackers. | `http://localhost:3000/dashboard` |
+| **Wireless Virtual Stream Deck** | Touch macro pad with haptic feedback for phone, iPad, or desktop. 1-touch scene switching, mic mutes, soundboard, and panic shield. | `http://localhost:3000/deck` *(or `http://<ip>:3000/deck`)* |
+| **Standalone Webcam Overlay** | Dedicated modular camera dock for OBS **Nested Scenes**. Allows scaling, moving, and cropping without breaking layout bounds! | `http://localhost:3000/overlays/webcam` |
+| **03 In-Game HUD** | Transparent gaming overlay with top event ticker, floating auto-fade chat, and timed sponsor lower-third. | `http://localhost:3000/overlays/game` |
+| **02 Talk / React HUD** | Split-screen reaction layout with primary media capture frame, camera box, and live chat feed. | `http://localhost:3000/overlays/chatting` |
+| **01 Starting Soon** | Ambient fluid gradient mesh, kinetic title reveal, live countdown timer, and episode agenda cards. | `http://localhost:3000/overlays/starting` |
+| **04 Be Right Back** | Intermission screen with breathing studio lighting, sponsor spotlight loop, and chat feed. | `http://localhost:3000/overlays/brb` |
+| **05 Stream Ending** | Outro screen with scrolling supporter credits, session top donor, and next broadcast schedule. | `http://localhost:3000/overlays/ending` |
 
 ---
 
-## 2. Directory Structure
+## 2. Directory Structure (Next.js 15 App Router)
 
 ```
-d:\Progency\om.streaming\
-├── assets/
-│   ├── css/
-│   │   └── editorial-design.css   # Studio typography (Syne, Plus Jakarta Sans), smoked acrylic & animations
-│   └── js/
-│       ├── channel-bus.js         # Realtime cross-source BroadcastChannel event sync
-│       ├── sponsor-engine.js      # Automated sponsor rotation, promo codes & luxury audio chime
-│       ├── alert-engine.js        # Typographic queue-based Follower/Sub/Donation popups
-│       └── chat-widget.js         # Smooth on-screen stream chat with role tags
-├── config/
-│   └── stream-config.json         # Channel meta, socials, sponsors, discount codes & timings
-├── overlays/
-│   ├── game-overlay.html          # Clean in-game HUD (16:9 cam, event chip, timed sponsor lower-third)
-│   ├── chatting-react.html        # Talk / React / Browser review split scene with sponsor spotlight
-│   ├── starting-soon.html         # Ambient fluid mesh, live countdown, stream agenda & sponsor bar
-│   ├── brb.html                   # Intermission screen with rotating sponsor card
-│   └── stream-ending.html         # Outro credits roll, top gifters & next stream date
-├── dashboard/
-│   ├── index.html                 # Streamer Control Deck UI
-│   ├── dashboard.js               # Event trigger handlers & live metric updater
-│   └── dashboard.css              # Dark studio control panel styling
-├── server.js                      # Local streaming & webhook server (POST /api/chat, /api/alert)
-├── CHAT_INTEGRATION_GUIDE.md      # Step-by-step Twitch, YouTube & OBS Dock setup guide
-└── README.md
+om.streaming/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx                 # Root layout with Syne, Plus Jakarta Sans & Space Mono
+│   │   ├── page.tsx                   # Studio Landing Gateway
+│   │   ├── globals.css                # Industrial minimalist CSS tokens & tactile button physics
+│   │   ├── dashboard/page.tsx         # Executive Control Deck with 16:9 Live Previews
+│   │   ├── deck/page.tsx              # Virtual Stream Deck (Mobile & Tablet touch pad)
+│   │   ├── overlays/
+│   │   │   ├── layout.tsx             # 1920x1080 transparent canvas layout + AlertBox
+│   │   │   ├── game/page.tsx          # 03_IN_GAME HUD overlay
+│   │   │   ├── chatting/page.tsx      # 02_TALK_REACT Just Chatting overlay
+│   │   │   ├── starting/page.tsx      # 01_STARTING_SOON Countdown overlay
+│   │   │   ├── brb/page.tsx           # 04_BRB Intermission overlay
+│   │   │   ├── ending/page.tsx        # 05_STREAM_ENDING Outro overlay
+│   │   │   ├── webcam/page.tsx        # ★ Dedicated Standalone Webcam Overlay ★
+│   │   │   ├── chat/page.tsx          # Dedicated transparent chat widget
+│   │   │   ├── alerts/page.tsx        # Dedicated transparent alert popup
+│   │   │   ├── ticker/page.tsx        # Dedicated transparent event ticker
+│   │   │   └── sponsor/page.tsx       # Dedicated transparent sponsor lower-third
+│   │   └── api/                       # Webhooks for chat, alerts, sponsors & deck actions
+│   ├── components/
+│   │   ├── dashboard/                 # Previews, Webcam settings, Text studio, Alert simulator
+│   │   ├── deck/                      # Full-screen mobile touch matrix with haptics
+│   │   └── overlays/                  # WebcamFrame, AnimatedText, AlertBox, SponsorCard, ChatWidget
+│   ├── lib/
+│   │   ├── stream-bus.ts              # Universal event bus (BroadcastChannel + SSE + localStorage)
+│   │   ├── sound-effects.ts           # Web Audio API synthesizer for luxury chimes & SFX
+│   │   ├── twitch-irc.ts              # Zero-token anonymous Twitch IRC WebSocket client
+│   │   └── hotkeys.ts                 # Keyboard shortcuts engine (Num 1-5, M, P, S)
+│   └── config/
+│       └── stream-config.ts           # Channel metadata, default goals, and sponsor data
+├── obs_scene_collection_uncompiled.json # Ready-to-import OBS Scene Collection
+├── OBS_IMPORT_AND_SETUP_GUIDE.md      # Step-by-step OBS import and camera alignment guide
+├── CHAT_INTEGRATION_GUIDE.md          # Live chat and Twitch connector guide
+├── package.json                       # Next.js 15, React 19, TypeScript, Tailwind, Framer Motion
+└── tsconfig.json
 ```
 
 ---
 
-## 3. Quick Start & Setup in OBS Studio
+## 3. Quick Start
 
-### Option A: Local Dev Server (Recommended)
-1. In your terminal, run:
-   ```bash
-   node server.js
-   ```
-2. Your server will run at `http://localhost:3000`. You can also open the dashboard on your phone or tablet by typing `http://<YOUR_PC_IP>:3000/dashboard/index.html`.
+### 1. Launch the Studio Suite:
+```powershell
+# In the project directory:
+npm run start   # Or npm run dev
+```
 
-### Option B: Direct File Mode (Zero Server Needed)
-You can directly load the files into OBS using `file:///d:/Progency/om.streaming/overlays/...`.
+### 2. Open OBS Studio:
+- Go to **Scene Collection** -> **Import** -> Select `obs_scene_collection_uncompiled.json`.
+- Select **`uncompiled.om Production Suite`** from the Scene Collection menu.
+- Your camera and display will automatically be bound with zero overflow!
 
----
-
-## 4. Configuring OBS Scenes (Step-by-Step)
-
-In OBS Studio, set your **Base Canvas** to `1920x1080` (Settings -> Video).
-
-### Scene 1: Starting Soon
-1. Create a scene named **`01_STARTING_SOON`**.
-2. Add a **Browser Source**:
-   - **URL**: `http://localhost:3000/overlays/starting-soon.html` (or browse to local file).
-   - **Width**: `1920`, **Height**: `1080`.
-   - Check: `Shutdown source when not visible`.
-   - Check: `Refresh browser when scene becomes active`.
-
-### Scene 2: Talk & React (Just Chatting)
-1. Create a scene named **`02_TALK_REACT`**.
-2. Layer Order (Top to Bottom):
-   - **Top Layer**: Browser Source (`http://localhost:3000/overlays/chatting-react.html`, `1920x1080`).
-   - **Underneath Camera Slot (Right Top)**: **Video Capture Device** (Your Camera). Resize and position within the camera cutout frame.
-   - **Underneath Main Viewport (Left)**: **Window Capture** or **Display Capture** (YouTube video, Reddit, Game preview).
-
-### Scene 3: In-Game Session
-1. Create a scene named **`03_IN_GAME`**.
-2. Layer Order (Top to Bottom):
-   - **Top Layer**: Browser Source (`http://localhost:3000/overlays/game-overlay.html`, `1920x1080`).
-   - **Bottom-Right Corner**: **Video Capture Device** (Your Camera) resized to fit inside the minimal webcam frame.
-   - **Bottom Layer**: **Game Capture** (Set to "Capture any fullscreen application").
-
-### Scene 4: Intermission (BRB)
-1. Create a scene named **`04_BRB`**.
-2. Add Browser Source (`http://localhost:3000/overlays/brb.html`, `1920x1080`).
-
-### Scene 5: Stream Ending
-1. Create a scene named **`05_ENDING`**.
-2. Add Browser Source (`http://localhost:3000/overlays/stream-ending.html`, `1920x1080`).
-
----
-
-## 5. Sponsor Automation & Control Deck
-
-### Automated Rotation
-- The system automatically reads `config/stream-config.json`.
-- Every **3-4 minutes**, a luxury brand collaboration card slides smoothly onto the screen with a clean 3-tone studio chime, displaying:
-  - Brand name (e.g., Nothing, Keychron, MOFT, Modern Creative).
-  - Collab badge (`[ OFFICIAL AUDIO PARTNER ]`).
-  - Headline and description.
-  - Discount code pill (e.g., `UNCOMPILED - 15% OFF`).
-  - Linear countdown timer bar.
-
-### Streamer Control Deck (`/dashboard/index.html`)
-Open `http://localhost:3000/dashboard/index.html` on your second monitor or tablet:
-- **Instant Sponsor Broadcast**: Click on any sponsor button to immediately force that sponsor on screen during a shoutout.
-- **Alert Testing**: Simulate Followers, Tier 1/2/3 Subs, Donations ($), and Raids in real time to test your overlay popups.
-- **Live Stream Topic**: Change what topic/game you are reacting to; it synchronizes instantly across all active OBS overlays.
-- **Countdown Adjuster**: Change the Starting Soon countdown timer duration on the fly.
+### 3. Open Controls:
+- On your PC: `http://localhost:3000/dashboard`
+- On your phone or iPad: `http://<your-pc-ip>:3000/deck`

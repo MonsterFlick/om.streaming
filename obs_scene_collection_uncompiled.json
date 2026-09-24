@@ -68,7 +68,8 @@
     { "name": "02_TALK_REACT" },
     { "name": "03_IN_GAME" },
     { "name": "04_BRB" },
-    { "name": "05_STREAM_ENDING" }
+    { "name": "05_STREAM_ENDING" },
+    { "name": "06_SEPARATED_CAM_NEST" }
   ],
   "current_scene": "02_TALK_REACT",
   "current_program_scene": "02_TALK_REACT",
@@ -120,9 +121,7 @@
       "uuid": "62401801-6405-4200-a418-7a97e93967f7",
       "id": "monitor_capture",
       "versioned_id": "monitor_capture",
-      "settings": {
-        "monitor_id": "\\\\?\\DISPLAY#ACR074D#5&2c66659e&0&UID24834#{e6f07b5f-ee97-4a90-b076-33f57bf4eaa7}"
-      },
+      "settings": {},
       "mixers": 0,
       "sync": 0,
       "flags": 0,
@@ -197,12 +196,12 @@
       "id": "browser_source",
       "versioned_id": "browser_source",
       "settings": {
-        "url": "http://localhost:3000/overlays/starting-soon.html",
+        "url": "http://localhost:3000/overlays/starting",
         "width": 1920,
         "height": 1080,
         "fps": 60,
-        "restart_when_active": true,
-        "shutdown": true
+        "restart_when_active": false,
+        "shutdown": false
       },
       "mixers": 0,
       "sync": 0,
@@ -228,7 +227,7 @@
       "id": "browser_source",
       "versioned_id": "browser_source",
       "settings": {
-        "url": "http://localhost:3000/overlays/chatting-react.html",
+        "url": "http://localhost:3000/overlays/chatting",
         "width": 1920,
         "height": 1080,
         "fps": 60,
@@ -259,7 +258,7 @@
       "id": "browser_source",
       "versioned_id": "browser_source",
       "settings": {
-        "url": "http://localhost:3000/overlays/game-overlay.html",
+        "url": "http://localhost:3000/overlays/game",
         "width": 1920,
         "height": 1080,
         "fps": 60,
@@ -290,12 +289,12 @@
       "id": "browser_source",
       "versioned_id": "browser_source",
       "settings": {
-        "url": "http://localhost:3000/overlays/brb.html",
+        "url": "http://localhost:3000/overlays/brb",
         "width": 1920,
         "height": 1080,
         "fps": 60,
-        "restart_when_active": true,
-        "shutdown": true
+        "restart_when_active": false,
+        "shutdown": false
       },
       "mixers": 0,
       "sync": 0,
@@ -321,12 +320,43 @@
       "id": "browser_source",
       "versioned_id": "browser_source",
       "settings": {
-        "url": "http://localhost:3000/overlays/stream-ending.html",
+        "url": "http://localhost:3000/overlays/ending",
         "width": 1920,
         "height": 1080,
         "fps": 60,
-        "restart_when_active": true,
-        "shutdown": true
+        "restart_when_active": false,
+        "shutdown": false
+      },
+      "mixers": 0,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1.0,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": false,
+      "push-to-mute": false,
+      "push-to-mute-delay": 0,
+      "push-to-talk": false,
+      "push-to-talk-delay": 0,
+      "hotkeys": {},
+      "deinterlace_mode": 0,
+      "deinterlace_field_order": 0,
+      "monitoring_type": 0,
+      "private_settings": {}
+    },
+    {
+      "prev_ver": 537001985,
+      "name": "Overlay: Standalone Webcam Frame",
+      "uuid": "b8c9d0e1-f2a3-4e77-f612-345678901234",
+      "id": "browser_source",
+      "versioned_id": "browser_source",
+      "settings": {
+        "url": "http://localhost:3000/overlays/webcam",
+        "width": 1920,
+        "height": 1080,
+        "fps": 60,
+        "restart_when_active": false,
+        "shutdown": false
       },
       "mixers": 0,
       "sync": 0,
@@ -547,6 +577,52 @@
             "pos": { "x": 0.0, "y": 0.0 },
             "scale": { "x": 1.0, "y": 1.0 },
             "id": 1
+          }
+        ]
+      },
+      "mixers": 0,
+      "sync": 0,
+      "flags": 0,
+      "volume": 1.0,
+      "balance": 0.5,
+      "enabled": true,
+      "muted": false,
+      "hotkeys": {},
+      "monitoring_type": 0
+    },
+    {
+      "prev_ver": 537001985,
+      "name": "06_SEPARATED_CAM_NEST",
+      "uuid": "11111111-2222-3333-4444-555555555556",
+      "id": "scene",
+      "versioned_id": "scene",
+      "settings": {
+        "id_counter": 2,
+        "custom_size": false,
+        "items": [
+          {
+            "name": "Overlay: Standalone Webcam Frame",
+            "source_uuid": "b8c9d0e1-f2a3-4e77-f612-345678901234",
+            "visible": true,
+            "locked": true,
+            "align": 5,
+            "bounds_type": 0,
+            "pos": { "x": 0.0, "y": 0.0 },
+            "scale": { "x": 1.0, "y": 1.0 },
+            "id": 1
+          },
+          {
+            "name": "Webcam (Video Capture Device)",
+            "source_uuid": "b2c3d4e5-f6a7-4811-90bc-def012345678",
+            "visible": true,
+            "locked": false,
+            "align": 5,
+            "bounds_type": 2,
+            "bounds_align": 0,
+            "bounds": { "x": 1920.0, "y": 1080.0 },
+            "pos": { "x": 0.0, "y": 0.0 },
+            "scale": { "x": 1.0, "y": 1.0 },
+            "id": 2
           }
         ]
       },
