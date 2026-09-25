@@ -29,6 +29,7 @@ import { TextAnimationStudio } from "@/components/dashboard/TextAnimationStudio"
 import { AlertSimulator } from "@/components/dashboard/AlertSimulator";
 import { SponsorManager } from "@/components/dashboard/SponsorManager";
 import { ChatController } from "@/components/dashboard/ChatController";
+import { ChatAutomationDeck } from "@/components/dashboard/ChatAutomationDeck";
 import { MetricsTracker } from "@/components/dashboard/MetricsTracker";
 import { SoundboardDock } from "@/components/dashboard/SoundboardDock";
 import { RunOfShowNotes } from "@/components/dashboard/RunOfShowNotes";
@@ -208,7 +209,12 @@ export default function DashboardPage() {
           <ChatController />
         </section>
 
-        {/* ROW 4: Goals & Metrics Synchronizer (12 cols) */}
+        {/* ROW 4: Chat Automations & Bot Commands Deck (12 cols) */}
+        <section className="lg:col-span-12">
+          <ChatAutomationDeck />
+        </section>
+
+        {/* ROW 5: Goals & Metrics Synchronizer (12 cols) */}
         <section className="lg:col-span-12">
           <MetricsTracker state={state} onUpdate={handleMetricsUpdate} />
         </section>

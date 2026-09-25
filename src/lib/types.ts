@@ -48,6 +48,36 @@ export interface ChatMessage {
   text: string;
   timestamp: number;
   platform?: "kick" | "youtube" | "system";
+  isFirstChat?: boolean;
+  isBotResponse?: boolean;
+  commandTriggered?: string;
+}
+
+export interface ChatCommand {
+  id: string;
+  command: string;
+  response: string;
+  description: string;
+  enabled: boolean;
+  aliases?: string[];
+}
+
+export interface ChatAutomationConfig {
+  welcomeNewChatters: boolean;
+  welcomeMessageTemplate: string;
+  welcomeSound: boolean;
+  showFirstChatBadge: boolean;
+  commandsEnabled: boolean;
+  botName: string;
+  commands: ChatCommand[];
+}
+
+export interface ShoutoutEvent {
+  id: string;
+  targetUser: string;
+  shoutedBy: string;
+  message: string;
+  timestamp: number;
 }
 
 export type WebcamAspectRatio = "16:9" | "4:3" | "1:1" | "9:16";
