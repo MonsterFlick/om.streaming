@@ -22,7 +22,7 @@ export interface AlertEvent {
   message?: string;
   tier?: string;
   timestamp: number;
-  platform?: "twitch" | "kick" | "youtube" | "system";
+  platform?: "kick" | "youtube" | "system";
 }
 
 export interface SponsorItem {
@@ -47,7 +47,7 @@ export interface ChatMessage {
   role: ChatRole;
   text: string;
   timestamp: number;
-  platform?: "twitch" | "kick" | "youtube" | "system";
+  platform?: "kick" | "youtube" | "system";
 }
 
 export type WebcamAspectRatio = "16:9" | "4:3" | "1:1" | "9:16";

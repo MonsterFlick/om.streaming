@@ -1,39 +1,48 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { MessageSquare, Radio, Send, Trash2, CheckCircle2 } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { MessageSquare, Send, Trash2, CheckCircle2 } from "lucide-react";
 import { streamBus } from "@/lib/stream-bus";
 import { soundEffects } from "@/lib/sound-effects";
-import { TwitchIRCClient } from "@/lib/twitch-irc";
+import { KickWebSocketClient } from "@/lib/kick-integration";
 import { ChatRole } from "@/lib/types";
 
 export function ChatController() {
-  const [twitchChannel, setTwitchChannel] = useState("");
+  const [kickSlug, setKickSlug] = useState("uncompiled-om");
   const [isConnected, setIsConnected] = useState(false);
   const [authorName, setAuthorName] = useState("uncompiled.om");
   const [authorRole, setAuthorRole] = useState<ChatRole>("STREAMER");
   const [chatText, setChatText] = useState("");
+  const [authorPlatform, setAuthorPlatform] = useState<"kick" | "youtube" | "system">("kick");
 
-  const twitchRef = useRef<TwitchIRCClient | null>(null);
+  const kickRef = useRef<KickWebSocketClient | null>(null);
 
-  const handleConnectTwitch = () => {
-    if (!twitchChannel.trim()) return;
+  const handleConnectKick = () => {
+    if (!kickSlug.trim()) return;
     soundEffects.play("click");
 
-    if (twitchRef.current) {
-      twitchRef.current.disconnect();
+    if (kickRef.current) {
+      kickRef.current.disconnect();
     }
 
-    const client = new TwitchIRCClient((msg) => {
+    const client = new KickWebSocketClient((msg) => {
       streamBus.emit("NEW_CHAT_MESSAGE", msg);
     });
 
-    client.connect(twitchChannel);
-    twitchRef.current = client;
+    client.connect(kickSlug);
+    kickRef.current = client;
     setIsConnected(true);
   };
 
-  const [authorPlatform, setAuthorPlatform] = useState<"kick" | "youtube" | "twitch" | "system">("kick");
+  useEffect(() => {
+    // Auto-connect Kick chat on mount
+    handleConnectKick();
+    return () => {
+      if (kickRef.current) {
+        kickRef.current.disconnect();
+      }
+    };
+  }, []);
 
   const handleSendAnnouncement = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,29 +85,29 @@ export function ChatController() {
         </button>
       </div>
 
-      {/* Twitch Native Connector */}
+      {/* Kick Native Connector */}
       <div className="p-3.5 rounded-2xl bg-black/40 border border-white/5 flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <label className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
-            NATIVE TWITCH / MULTI-STREAM IRC FEED
+            NATIVE KICK CHAT CONNECTOR (KICK.COM/UNCOMPILED-OM)
           </label>
           {isConnected && (
             <span className="flex items-center gap-1 font-mono text-[10px] text-emerald-400 font-bold">
-              <CheckCircle2 size={11} /> CONNECTED
+              <CheckCircle2 size={11} /> KICK CONNECTED
             </span>
           )}
         </div>
 
         <div className="flex gap-2">
           <input
-            value={twitchChannel}
-            onChange={(e) => setTwitchChannel(e.target.value)}
-            placeholder="e.g. uncompiled_om"
+            value={kickSlug}
+            onChange={(e) => setKickSlug(e.target.value)}
+            placeholder="e.g. uncompiled-om"
             className="flex-1 px-3 py-2 rounded-xl bg-white/5 border border-white/10 font-mono text-xs text-white focus:outline-none focus:border-amber-400"
           />
           <button
-            onClick={handleConnectTwitch}
-            className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold transition-colors"
+            onClick={handleConnectKick}
+            className="px-4 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 font-mono text-xs font-bold transition-colors"
           >
             {isConnected ? "RECONNECT" : "CONNECT"}
           </button>
@@ -126,7 +135,6 @@ export function ChatController() {
           >
             <option value="kick">KICK 🟢</option>
             <option value="youtube">YOUTUBE 🔴</option>
-            <option value="twitch">TWITCH 🟣</option>
             <option value="system">SYSTEM ⚙️</option>
           </select>
 

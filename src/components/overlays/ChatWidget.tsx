@@ -93,12 +93,6 @@ export function ChatWidget({
             YT
           </span>
         );
-      case "twitch":
-        return (
-          <span className="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/40 font-mono text-[8px] font-extrabold uppercase tracking-wider">
-            TWITCH
-          </span>
-        );
       default:
         return null;
     }
