@@ -21,6 +21,7 @@ import {
 import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { soundEffects } from "@/lib/sound-effects";
 import { StreamScene, StreamState } from "@/lib/types";
+import { UncompiledOmCyberLogo } from "@/components/brand/UncompiledOmCyberLogo";
 
 export function MobileDeckLayout() {
   const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
@@ -135,17 +136,7 @@ export function MobileDeckLayout() {
       {/* Top Deck Status Bar */}
       <header className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-display font-black text-amber-400 text-sm">
-            Ω
-          </div>
-          <div>
-            <div className="font-display font-bold text-sm tracking-wider">
-              VIRTUAL STREAM DECK
-            </div>
-            <div className="font-mono text-[9px] text-zinc-400">
-              UNCOMPILED.OM // TACTILE MATRIX
-            </div>
-          </div>
+          <UncompiledOmCyberLogo width={160} height={50} showBackground={false} accentColor="#a855f7" />
         </div>
 
         <div className="flex items-center gap-2">

@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Tv, Smartphone, Layers, Radio, Sparkles, ExternalLink } from "lucide-react";
+import { Tv, Smartphone, Layers, Radio, Sparkles, ExternalLink, Palette } from "lucide-react";
 import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { StreamState } from "@/lib/types";
+import { UncompiledOmCyberLogo } from "@/components/brand/UncompiledOmCyberLogo";
 
 export default function StudioLandingPage() {
   const [state, setState] = useState<StreamState>(INITIAL_STREAM_STATE);
@@ -33,20 +34,17 @@ export default function StudioLandingPage() {
       {/* Header */}
       <header className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-display font-black text-xl">
-            Ω
-          </div>
-          <div>
-            <div className="font-display font-extrabold text-2xl tracking-tight flex items-center gap-1.5">
-              uncompiled<span className="text-amber-500">.</span>om
-            </div>
-            <div className="font-mono text-[11px] text-zinc-400 tracking-wider">
-              TACTILE INDUSTRIAL STUDIO SUITE 2.0
-            </div>
-          </div>
+          <UncompiledOmCyberLogo width={220} height={68} showBackground={false} accentColor="#a855f7" />
         </div>
 
         <div className="flex items-center gap-3">
+          <Link
+            href="/brand"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold transition-all"
+          >
+            <Palette size={14} />
+            BRAND ASSETS STUDIO
+          </Link>
           <div className="status-pill">
             <span className={`status-dot ${state.isLive ? "live" : "amber"}`} />
             <span>{state.isLive ? "BROADCAST ACTIVE" : "OFFLINE"}</span>
@@ -58,15 +56,15 @@ export default function StudioLandingPage() {
         </div>
       </header>
 
-      {/* Main Dual Hero Grid */}
-      <main className="relative z-10 my-auto py-12 max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Main Dual/Triple Hero Grid */}
+      <main className="relative z-10 my-auto py-12 max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: Executive Control Deck */}
         <Link
           href="/dashboard"
-          className="group relative rounded-3xl p-8 bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/10 hover:border-amber-500/40 transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden"
+          className="group relative rounded-3xl p-6 bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/10 hover:border-amber-500/40 transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden"
         >
-          <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Tv size={120} />
+          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Tv size={100} />
           </div>
 
           <div>
@@ -74,15 +72,15 @@ export default function StudioLandingPage() {
               <Tv size={13} />
               PC Master Control
             </div>
-            <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white group-hover:text-amber-400 transition-colors">
+            <h2 className="font-display font-extrabold text-2xl text-white group-hover:text-amber-400 transition-colors">
               Executive Dashboard
             </h2>
-            <p className="mt-3 text-zinc-400 text-sm leading-relaxed max-w-md">
+            <p className="mt-2 text-zinc-400 text-xs leading-relaxed">
               Live multi-screen 16:9 OBS previews, text animation studio, alert simulator, sponsor cards, Twitch chat, and webcam mode switcher.
             </p>
           </div>
 
-          <div className="mt-8 flex items-center gap-2 font-mono text-xs text-amber-400 font-bold group-hover:translate-x-1 transition-transform">
+          <div className="mt-6 flex items-center gap-2 font-mono text-xs text-amber-400 font-bold group-hover:translate-x-1 transition-transform">
             LAUNCH CONTROL DECK →
           </div>
         </Link>
@@ -90,10 +88,10 @@ export default function StudioLandingPage() {
         {/* Card 2: Virtual Stream Deck */}
         <Link
           href="/deck"
-          className="group relative rounded-3xl p-8 bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/10 hover:border-blue-500/40 transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden"
+          className="group relative rounded-3xl p-6 bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/10 hover:border-blue-500/40 transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden"
         >
-          <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Smartphone size={120} />
+          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Smartphone size={100} />
           </div>
 
           <div>
@@ -101,16 +99,43 @@ export default function StudioLandingPage() {
               <Smartphone size={13} />
               Mobile & Tablet Touch Pad
             </div>
-            <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white group-hover:text-blue-400 transition-colors">
+            <h2 className="font-display font-extrabold text-2xl text-white group-hover:text-blue-400 transition-colors">
               Virtual Stream Deck
             </h2>
-            <p className="mt-3 text-zinc-400 text-sm leading-relaxed max-w-md">
+            <p className="mt-2 text-zinc-400 text-xs leading-relaxed">
               Tactile hardware-style buttons for 1-touch scene switching, mic mutes, soundboard effects, panic shield, and confetti on your phone or tablet.
             </p>
           </div>
 
-          <div className="mt-8 flex items-center gap-2 font-mono text-xs text-blue-400 font-bold group-hover:translate-x-1 transition-transform">
+          <div className="mt-6 flex items-center gap-2 font-mono text-xs text-blue-400 font-bold group-hover:translate-x-1 transition-transform">
             OPEN STREAM DECK →
+          </div>
+        </Link>
+
+        {/* Card 3: Code Brand Assets & Media Kit */}
+        <Link
+          href="/brand"
+          className="group relative rounded-3xl p-6 bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/10 hover:border-emerald-500/40 transition-all duration-300 shadow-2xl flex flex-col justify-between overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Palette size={100} />
+          </div>
+
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-semibold uppercase tracking-wider mb-4">
+              <Palette size={13} />
+              Code-Based Media Kit
+            </div>
+            <h2 className="font-display font-extrabold text-2xl text-white group-hover:text-emerald-400 transition-colors">
+              Brand Assets Studio
+            </h2>
+            <p className="mt-2 text-zinc-400 text-xs leading-relaxed">
+              Generate & export brand color tokens, typography scales, vector logos, and social media banners/avatars for Instagram, YouTube, and Kick.
+            </p>
+          </div>
+
+          <div className="mt-6 flex items-center gap-2 font-mono text-xs text-emerald-400 font-bold group-hover:translate-x-1 transition-transform">
+            GENERATE BRAND ASSETS →
           </div>
         </Link>
       </main>

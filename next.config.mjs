@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  // Disable Next 15 devtools overlay & segment explorer which causes React Client Manifest HMR crashes
+  devIndicators: false,
   images: {
     unoptimized: true,
   },

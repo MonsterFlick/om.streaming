@@ -14,11 +14,13 @@ import {
   ShieldAlert,
   Volume2,
   VolumeX,
+  Palette,
 } from "lucide-react";
 import { streamBus, INITIAL_STREAM_STATE } from "@/lib/stream-bus";
 import { soundEffects } from "@/lib/sound-effects";
 import { setupStreamHotkeys } from "@/lib/hotkeys";
 import { StreamScene, StreamState, WebcamConfig, TextAnimationPreset } from "@/lib/types";
+import { UncompiledOmCyberLogo } from "@/components/brand/UncompiledOmCyberLogo";
 
 // Dashboard Subcomponents
 import { ScreenPreviewDock } from "@/components/dashboard/ScreenPreviewDock";
@@ -95,23 +97,17 @@ export default function DashboardPage() {
       {/* Top Mission Control Bar */}
       <header className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-white/10 pb-5 mb-6">
         <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-display font-black text-amber-400 text-lg hover:bg-amber-500/20 transition-colors"
-          >
-            Ω
+          <Link href="/">
+            <UncompiledOmCyberLogo width={200} height={60} showBackground={false} accentColor="#a855f7" />
           </Link>
-          <div>
-            <div className="font-display font-extrabold text-xl tracking-tight flex items-center gap-1.5">
-              uncompiled<span className="text-amber-500">.</span>om
-              <span className="font-mono text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 ml-2 font-normal">
-                STUDIO 2.0
-              </span>
-            </div>
-            <div className="font-mono text-[10px] text-zinc-400 tracking-wider">
-              EXECUTIVE CONTROL DECK // REALTIME EVENT BRIDGE
-            </div>
-          </div>
+
+          <Link
+            href="/brand"
+            className="hidden sm:flex items-center gap-1.5 ml-3 px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold transition-all"
+          >
+            <Palette size={14} />
+            <span>BRAND KIT</span>
+          </Link>
         </div>
 
         {/* Quick Scene & Hardware Status Controls */}
